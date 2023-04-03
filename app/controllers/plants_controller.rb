@@ -13,7 +13,7 @@ class PlantsController < ApplicationController
         plant = Plant.find(params[:id])
         plant.update(plant_params)
         if plant.valid?
-            render json: plant
+        render json: plant
         end
     end
 
@@ -23,20 +23,6 @@ class PlantsController < ApplicationController
         render json: plant
     end
 
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     private
     def plant_params
     params.require(:plant).permit(:name, :age, :enjoy, :image)
