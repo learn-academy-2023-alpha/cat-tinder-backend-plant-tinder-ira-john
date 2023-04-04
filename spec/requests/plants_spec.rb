@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe "Plants", type: :request do
-  describe "GET /index" do
-    it "gets a list of plants" do
+RSpec.describe 'Plants', type: :request do
+  describe 'GET /index' do
+    it 'gets a list of plants' do
       Plant.create(
         name: 'Harold',
         age: 12,
@@ -17,8 +17,8 @@ RSpec.describe "Plants", type: :request do
   end
 end
 
-  describe "POST /create" do
-    it "creates a plant" do
+  describe 'POST /create' do
+    it 'creates a plant' do
     plant_params = {
       plant:{
         name: 'James',
@@ -33,13 +33,13 @@ end
     end
   end
 
-  describe "PATCH /update" do
-    it "updates a plant" do
+  describe 'PATCH /update' do
+    it 'updates a plant' do
     plant_params ={
     plant:{
-      name: "Harold",
+      name: 'Harold',
       age:12,
-      enjoys: "insect and people watching",
+      enjoys: 'insect and people watching',
       image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUEr2hrRtXjiqoWSyrog7ibYSYlOUoESSJtw&usqp=CAU'}
     }
   
@@ -47,9 +47,9 @@ end
     plant = Plant.first
     
     updated_plant_params = {
-     plant: { name: "Harold",
+     plant: { name: 'Harold',
       age:13,
-      enjoys: "insect and people watching",
+      enjoys: 'insect and people watching',
       image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUEr2hrRtXjiqoWSyrog7ibYSYlOUoESSJtw&usqp=CAU'}
   }
     patch "/plants/#{plant.id}", params:updated_plant_params
@@ -59,13 +59,13 @@ end
     end
   end
   
-  describe "DELETE /destroy" do
+  describe 'DELETE /destroy' do
     it 'deletes a plant' do
     plant_params ={
     plant:{
-      name: "Harold",
+      name: 'Harold',
       age:12,
-      enjoys: "insect and people watching",
+      enjoys: 'insect and people watching',
       image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUEr2hrRtXjiqoWSyrog7ibYSYlOUoESSJtw&usqp=CAU'}
     }
     

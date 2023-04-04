@@ -1,11 +1,11 @@
 
 plant = [
-   {name:"Sequoia",
+   {name:'Sequoia',
     age:10,
-    enjoy:"long walks in the forest",
+    enjoy:'long walks in the forest',
     image:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTA9OK9Ruz93vt11rknIyVLgttYtxSSunirYQ&usqp=CAU'},
 
-    {name: "Betty",
+    {name: 'Betty',
      age: 13,
      enjoy: 'days spent in the sun',
      image: 'https://i0.wp.com/laidbackgardener.blog/wp-content/uploads/2018/07/20180725e-myrtillocactus-geometrizans-fukurokuryuzinboku-worldofsucculents-com.jpg?w=1024&ssl=1'},
