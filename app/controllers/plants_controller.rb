@@ -1,12 +1,12 @@
 class PlantsController < ApplicationController
     def index
-    plants = Plant.all
-    render json: plants
+        plants = Plant.all
+        render json: plants
     end
 
     def create
-    plant = Plant.create(plant_params)
-    render json: plant
+        plant = Plant.create(plant_params)
+        render json: plant
     end
 
     def update
@@ -25,7 +25,7 @@ class PlantsController < ApplicationController
 
     private
     def plant_params
-    params.require(:plant).permit(:name, :age, :enjoy, :image)
+        params.require(:plant).permit(:name, :age, :enjoy, :image)
     end
 end
 
