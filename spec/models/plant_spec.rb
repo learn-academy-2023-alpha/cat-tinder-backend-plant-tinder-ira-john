@@ -32,38 +32,6 @@ RSpec.describe Plant, type: :model do
     plant = Plant.create(name:'Sequoia', age:10, enjoy:'long walks in the forest')
     expect(plant.errors[:image]).to_not be_empty
   end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 end
 
 
