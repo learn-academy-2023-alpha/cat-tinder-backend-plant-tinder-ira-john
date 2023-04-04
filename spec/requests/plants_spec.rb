@@ -15,7 +15,7 @@ RSpec.describe 'Plants', type: :request do
         expect(plant.length).to eq 1
     end
   end
-end
+
 
   describe 'POST /create' do
     it 'creates a plant' do
@@ -31,6 +31,62 @@ end
       plant = Plant.first
       expect(plant.name).to eq 'James'
     end
+    
+    it "doesn't create a plant without a name" do 
+      plant_params = {
+        plant: {
+        age: 10,
+        enjoy: 'long walks in the forest',
+        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTA9OK9Ruz93vt11rknIyVLgttYtxSSunirYQ&usqp=CAU'
+        }
+      }
+      post '/plants', params: plant_params 
+      expect(response.status).to eq 422
+      plant = JSON.parse(response.body)
+      expect(plant['name']).to include "can't be blank"
+    end
+
+    it "doesn't create a plant without an age" do
+      plant_params ={
+      plant: {
+      name:'Sequoia',
+      enjoy:'long walks in the forest',
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTA9OK9Ruz93vt11rknIyVLgttYtxSSunirYQ&usqp=CAU'
+      }
+      }
+      post '/plants', params: plant_params
+      expect(response.status).to eq 422
+      plant = JSON.parse(response.body)
+      expect(plant['age']).to include "can't be blank"
+    end
+      
+    it "doesn't create a plant without an enjoy" do
+      plant_params ={
+      plant: {
+      name:'Sequoia',
+      age:10,
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTA9OK9Ruz93vt11rknIyVLgttYtxSSunirYQ&usqp=CAU'
+      }
+      }
+      post '/plants', params: plant_params
+      expect(response.status).to eq 422
+      plant = JSON.parse(response.body)
+      expect(plant['enjoy']).to include "can't be blank"
+    end
+  
+    it "doesn't create a plant without an image" do
+      plant_params ={
+      plant: {
+      name:'Sequoia',
+      age:10,
+      enjoy: 'long walks in the forest'
+      }
+      }
+      post '/plants', params: plant_params
+      expect(response.status).to eq 422
+      plant = JSON.parse(response.body)
+      expect(plant['image']).to include "can't be blank"
+    end
   end
 
   describe 'PATCH /update' do
@@ -39,7 +95,7 @@ end
     plant:{
       name: 'Harold',
       age:12,
-      enjoys: 'insect and people watching',
+      enjoy: 'insect and people watching',
       image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUEr2hrRtXjiqoWSyrog7ibYSYlOUoESSJtw&usqp=CAU'}
     }
   
@@ -49,13 +105,72 @@ end
     updated_plant_params = {
      plant: { name: 'Harold',
       age:13,
-      enjoys: 'insect and people watching',
+      enjoy: 'insect and people watching',
       image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUEr2hrRtXjiqoWSyrog7ibYSYlOUoESSJtw&usqp=CAU'}
   }
     patch "/plants/#{plant.id}", params:updated_plant_params
       updated_plant = Plant.find(plant.id)
       expect(response).to have_http_status(200)
       expect(updated_plant.age).to eq 13
+    end
+    it "doesn't update a plant without a name" do 
+      plant_params = {
+        plant: {
+        name:'',
+        age: 10,
+        enjoy: 'long walks in the forest',
+        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTA9OK9Ruz93vt11rknIyVLgttYtxSSunirYQ&usqp=CAU'
+        }
+      }
+      post '/plants', params: plant_params 
+      expect(response.status).to eq 422
+      plant = JSON.parse(response.body)
+      expect(plant['name']).to include "can't be blank"
+    end
+
+    it "doesn't update a plant without an age" do
+      plant_params ={
+      plant: {
+      name:'Sequoia',
+      age: '',
+      enjoy:'long walks in the forest',
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTA9OK9Ruz93vt11rknIyVLgttYtxSSunirYQ&usqp=CAU'
+      }
+      }
+      post '/plants', params: plant_params
+      expect(response.status).to eq 422
+      plant = JSON.parse(response.body)
+      expect(plant['age']).to include "can't be blank"
+    end
+      
+    it "doesn't update a plant without an enjoy" do
+      plant_params ={
+      plant: {
+      name:'Sequoia',
+      age:10,
+      enjoy: '',
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTA9OK9Ruz93vt11rknIyVLgttYtxSSunirYQ&usqp=CAU'
+      }
+      }
+      post '/plants', params: plant_params
+      expect(response.status).to eq 422
+      plant = JSON.parse(response.body)
+      expect(plant['enjoy']).to include "can't be blank"
+    end
+  
+    it "doesn't update a plant without an image" do
+      plant_params ={
+      plant: {
+      name:'Sequoia',
+      age:10,
+      enjoy: 'long walks in the forest',
+      image: ''
+      }
+      }
+      post '/plants', params: plant_params
+      expect(response.status).to eq 422
+      plant = JSON.parse(response.body)
+      expect(plant['image']).to include "can't be blank"
     end
   end
   
@@ -65,7 +180,7 @@ end
     plant:{
       name: 'Harold',
       age:12,
-      enjoys: 'insect and people watching',
+      enjoy: 'insect and people watching',
       image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUEr2hrRtXjiqoWSyrog7ibYSYlOUoESSJtw&usqp=CAU'}
     }
     
@@ -78,3 +193,4 @@ end
       expect(plants).to be_empty
     end
   end
+end

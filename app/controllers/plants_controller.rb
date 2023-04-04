@@ -6,14 +6,20 @@ class PlantsController < ApplicationController
 
     def create
         plant = Plant.create(plant_params)
-        render json: plant
+        if plant.valid?
+            render json: plant
+        else
+            render json: plant.errors, status:422
+        end
     end
 
     def update
         plant = Plant.find(params[:id])
         plant.update(plant_params)
         if plant.valid?
-        render json: plant
+            render json: plant
+        else
+            render json: plant.errors, status: 422
         end
     end
 

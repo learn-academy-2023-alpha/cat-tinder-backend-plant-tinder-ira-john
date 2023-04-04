@@ -1,5 +1,5 @@
 
-plant = [
+plants = [
    {name:'Sequoia',
     age:10,
     enjoy:'long walks in the forest',
@@ -23,7 +23,7 @@ plant = [
      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUEr2hrRtXjiqoWSyrog7ibYSYlOUoESSJtw&usqp=CAU'},
 ]
 
-plant.each do
+plants.each do
   Plant.create plant
     puts "creating plants #{plant}"
 end
